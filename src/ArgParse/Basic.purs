@@ -447,7 +447,7 @@ choose name parsers =
 -- |
 -- | ```purescript
 -- | example =
--- |   helpFlag *> fromRecord
+-- |   flagHelp *> fromRecord
 -- |     { ...
 -- |     }
 -- | ```
@@ -470,7 +470,7 @@ flagHelp = ArgParser help (ArgFold { step, done, saturated: true })
 -- |
 -- | ```purescript
 -- | example =
--- |   infoFlag [ "--version", "-v" ] "1.0.0"
+-- |   flagInfo [ "--version", "-v" ] "1.0.0"
 -- |     *> fromRecord { ... }
 -- | ```
 flagInfo :: Array String -> String -> String -> ArgParser Unit
@@ -535,7 +535,7 @@ instance buildArgsCons ::
 -- | ```purescript
 -- | example =
 -- |   command [ "some-command", "sc" ] "Some command." do
--- |     helpFlag *> fromRecord
+-- |     flagHelp *> fromRecord
 -- |       { ...
 -- |       }
 -- | ```
