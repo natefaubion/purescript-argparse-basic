@@ -426,7 +426,7 @@ choose name parsers =
           if next.saturated then
             ArgMatch
               (failDup help DuplicateArg $ ArgFold
-                { step: go1 (foldr (:) (ArgFold next : ams) acc)
+                { step: go1 (acc <> (ArgFold next : ams))
                 , done: next.done
                 , saturated: true
                 })
