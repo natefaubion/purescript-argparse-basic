@@ -1,4 +1,6 @@
 { name = "argparse-basic"
+, license = "MIT"
+, repository = "https://github.com/natefaubion/purescript-argparse-basic.git"
 , dependencies =
   [ "arrays"
   , "bifunctors"
@@ -17,5 +19,5 @@
   , "unfoldable"
   ]
 , packages = ./packages.dhall
-, sources = [ "src/**/*.purs", "test/**/*.purs" ]
+, sources = [ "src/**/*.purs" ]
 }
