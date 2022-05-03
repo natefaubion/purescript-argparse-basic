@@ -21,5 +21,10 @@ jobs:
       - name: Build source
         run: spago build
 
+      - name: Verify Bower
+        run: |
+          npx bower install
+          npx pulp build
+
       - name: Verify formatting
         run: purs-tidy check src
