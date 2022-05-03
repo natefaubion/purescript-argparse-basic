@@ -264,7 +264,7 @@ unformat doc unf (ArgParser h init) = ArgParser help $ go init
     where
     step stk args =
       case f.step stk args of
-        ArgHalt (ArgError (h' : stk') err) ->
+        ArgHalt (ArgError (_ : stk') err) ->
           ArgHalt (ArgError (help : stk') err)
         ArgHalt err -> ArgHalt err
         ArgMatch a b -> ArgMatch (go a) b
@@ -555,8 +555,6 @@ command name doc (ArgParser h m) = ArgParser help $ go m
               ArgHalt err
             Right value ->
               ArgMatch (pure value) Nil
-    extract =
-      done <<< (help : _)
 
 -- | Matches any argument that satisfies a given predicate. Good for collecting
 -- | leftover arguments. It is not recommended to use `any` with `fromRecord`,
