@@ -1,0 +1,26 @@
+{
+  "name": "purescript-argparse-basic",
+  "license": ["MIT"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/natefaubion/purescript-argparse-basic.git"
+  },
+  "ignore": ["**/.*", "node_modules", "bower_components", "output"],
+  "dependencies": {
+    "purescript-arrays": "^v7.0.0",
+    "purescript-bifunctors": "^v6.0.0",
+    "purescript-control": "^v6.0.0",
+    "purescript-either": "^v6.0.0",
+    "purescript-foldable-traversable": "^v6.0.0",
+    "purescript-integers": "^v6.0.0",
+    "purescript-lists": "^v7.0.0",
+    "purescript-maybe": "^v6.0.0",
+    "purescript-newtype": "^v5.0.0",
+    "purescript-numbers": "^v9.0.0",
+    "purescript-prelude": "^v6.0.0",
+    "purescript-record": "^v4.0.0",
+    "purescript-strings": "^v6.0.0",
+    "purescript-tuples": "^v7.0.0",
+    "purescript-unfoldable": "^v6.0.0"
+  }
+}
