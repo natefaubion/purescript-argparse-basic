@@ -326,7 +326,7 @@ separated doc pat = unformat ("[" <> doc <> unwrap pat <> "...]") (Right <<< Str
 many :: forall a. ArgParser a -> ArgParser (List a)
 many (ArgParser help f) = ArgParser help (go1 Nil false f)
   where
-  go1 acc parsing (ArgFold { step, done })=
+  go1 acc parsing (ArgFold { step, done }) =
     ArgFold
       { step: \stk -> map (go2 acc stk) <<< step stk
       , done: \stk ->
@@ -425,19 +425,21 @@ choose name parsers =
         ArgMatch (ArgFold next) args' ->
           if next.saturated then
             ArgMatch
-              (failDup help DuplicateArg $ ArgFold
-                { step: go1 (foldr (:) (ArgFold next : ams) acc)
-                , done: next.done
-                , saturated: true
-                })
+              ( failDup help DuplicateArg $ ArgFold
+                  { step: go1 (foldr (:) (ArgFold next : ams) acc)
+                  , done: next.done
+                  , saturated: true
+                  }
+              )
               args'
           else
             ArgMatch
-              (ArgFold
-                { step: \stk' args'' -> go2 stk' args'' acc (ArgFold next : ams)
-                , done: next.done
-                , saturated: false
-                })
+              ( ArgFold
+                  { step: \stk' args'' -> go2 stk' args'' acc (ArgFold next : ams)
+                  , done: next.done
+                  , saturated: false
+                  }
+              )
               args'
     Nil ->
       ArgFail
@@ -626,7 +628,7 @@ parseArgs' (ArgFold { step, done }) stk args =
 
 -- | Prints an error to a String. This will include the full error context
 -- | and help.
-printArgError ::  ArgError -> String
+printArgError :: ArgError -> String
 printArgError (ArgError stk msg) =
   renderDoc case msg of
     ExpectedFlag ->
@@ -750,7 +752,7 @@ printHelpTable' stk = case _ of
   HelpAny doc ->
     case stk of
       HelpFormat help _ : _ ->
-        [ Tuple (IsAny help) [ Text help , Text doc ] ]
+        [ Tuple (IsAny help) [ Text help, Text doc ] ]
       _ ->
         [ Tuple (IsAny "ANY") [ Text "ANY", Text doc ] ]
   HelpRest doc ->
@@ -815,10 +817,12 @@ printTableLines ind rows = do
     colWidths =
       ixs # map \ix ->
         rows' # foldr
-          (flip Array.index ix
-            >>> fromMaybe []
-            >>> foldr (max <<< String.length) 0
-            >>> max) 0
+          ( flip Array.index ix
+              >>> fromMaybe []
+              >>> foldr (max <<< String.length) 0
+              >>> max
+          )
+          0
 
   cols <- rows'
   case NonEmptyArray.fromArray (Array.zip colWidths cols) of
@@ -826,7 +830,8 @@ printTableLines ind rows = do
     Just nea ->
       nea
         # NonEmptyArray.foldr1
-          (\(Tuple w1 col1) (Tuple w2 col2) ->
-            Tuple (w1 + w2) (joinColumns w1 "    " col1 col2))
+            ( \(Tuple w1 col1) (Tuple w2 col2) ->
+                Tuple (w1 + w2) (joinColumns w1 "    " col1 col2)
+            )
         # snd
         # map (append ind)
