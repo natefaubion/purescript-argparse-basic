@@ -1,19 +1,20 @@
 { name = "argparse-basic"
 , dependencies =
   [ "arrays"
-  , "console"
-  , "debug"
-  , "effect"
+  , "bifunctors"
+  , "control"
   , "either"
   , "foldable-traversable"
-  , "free"
+  , "integers"
   , "lists"
   , "maybe"
-  , "node-process"
-  , "psci-support"
+  , "newtype"
+  , "numbers"
+  , "prelude"
   , "record"
   , "strings"
-  , "transformers"
+  , "tuples"
+  , "unfoldable"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
